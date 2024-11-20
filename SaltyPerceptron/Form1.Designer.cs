@@ -28,12 +28,44 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
-            this.Text = "Form1";
+            AddFileButton = new Button();
+            extractedInfo = new ListBox();
+            SuspendLayout();
+            // 
+            // AddFileButton
+            // 
+            AddFileButton.Location = new Point(1053, 449);
+            AddFileButton.Name = "AddFileButton";
+            AddFileButton.Size = new Size(112, 34);
+            AddFileButton.TabIndex = 0;
+            AddFileButton.Text = "Add File";
+            AddFileButton.UseVisualStyleBackColor = true;
+            AddFileButton.Click += AddFileButton_Click;
+            // 
+            // extractedInfo
+            // 
+            extractedInfo.FormattingEnabled = true;
+            extractedInfo.ItemHeight = 25;
+            extractedInfo.Location = new Point(49, 77);
+            extractedInfo.Name = "extractedInfo";
+            extractedInfo.Size = new Size(1154, 304);
+            extractedInfo.TabIndex = 1;
+            // 
+            // Form1
+            // 
+            AutoScaleDimensions = new SizeF(10F, 25F);
+            AutoScaleMode = AutoScaleMode.Font;
+            ClientSize = new Size(1330, 544);
+            Controls.Add(extractedInfo);
+            Controls.Add(AddFileButton);
+            Name = "Form1";
+            Text = "Form1";
+            ResumeLayout(false);
         }
 
         #endregion
+
+        private Button AddFileButton;
+        private ListBox extractedInfo;
     }
 }
