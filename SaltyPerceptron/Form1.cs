@@ -4,10 +4,12 @@ namespace SaltyPerceptron
     public partial class Form1 : Form
     {
         InstructionRegistry instructionRegisty;
+        BranchPredictor branchPredictor;
         public Form1()
         {
             InitializeComponent();
             instructionRegisty = new InstructionRegistry();
+            branchPredictor = new BranchPredictor();
 
         }
 
@@ -27,12 +29,26 @@ namespace SaltyPerceptron
                 ExtractCharacterPairs(filePath);
                 List<Branch> instructions = instructionRegisty.GetAll();
 
+                int index = 1;  
                 foreach (var ins in instructions)
                 {
-                    extractedInfo.Items.Add($"Branch Type - {ins.Type.Type} : Action - {ins.Type.Action}");
+                    extractedInfo.Items.Add($"#{index} - Branch Type - {ins.Type.Type} : Action - {ins.Type.Action}");
+                    index++;
                 }
 
                 MessageBox.Show("Character pairs extracted successfully!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                instructions.ForEach(branch => branchPredictor.SimulateBranch(branch));
+
+                index = 1;
+                extractedInfo.Items.Clear();
+
+                foreach (var ins in instructions)
+                {
+                    extractedInfo.Items.Add($"#{index} - Branch Type - {ins.Type.Type} : Action - {ins.Type.Action} : Taken - {ins.Taken} : Predicted - {ins.TakenPredict}");
+                    index++; 
+                }
+
             }
         }
         private void ExtractCharacterPairs(string filePath)
@@ -43,7 +59,7 @@ namespace SaltyPerceptron
                 foreach (var line in File.ReadLines(filePath))
                 {
                     var parts = line.Split(' ');
-                    Branch branch = new Branch(parts[0], parts[1], parts[2]);
+                    Branch branch = new Branch(parts[0], parts[1]);
                     instructionRegisty.Add(branch);
 
                 }

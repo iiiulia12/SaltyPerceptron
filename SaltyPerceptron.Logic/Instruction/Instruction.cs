@@ -3,10 +3,10 @@ namespace SaltyPerceptron.Logic.Instruction
 {
     public class Instruction
     {
-        public String PC {  get; set; }
-        public Instruction(String PC)
+        public int PC {  get; set; }
+        public Instruction(string PC)
         {
-            this.PC = PC;
+            this.PC = int.Parse(PC);
         }
     }
 }
