@@ -19,32 +19,44 @@ namespace SaltyPerceptron.Logic.Logic
             return weights.Sum();
         }
 
-        public void AdjustWeights(bool isTaken, bool realTaken)
+        //public void AdjustWeights(bool isTaken, bool realTaken)
+        //{
+        //    if (isTaken == realTaken)
+        //    {
+        //        if (isTaken)
+        //        {
+        //            for (int i = 0; i < WT.Count; i++) WT[i]++;
+        //        }
+        //        else
+        //        {
+        //            for (int i = 0; i < WNT.Count; i++) WNT[i]++;
+        //        }
+        //    }
+        //    else
+        //    {
+
+        //        if (isTaken)
+        //        {
+        //            for (int i = 0; i < WT.Count; i++) WT[i]--;
+        //        }
+        //        else
+        //        {
+        //            for (int i = 0; i < WNT.Count; i++) WNT[i]--;
+        //        }
+        //    }
+        //}
+
+        public void AdjustWeights(bool realTaken)
         {
-            if (isTaken == realTaken)
+            int adjustment = realTaken ? 1 : -1;
+
+            for (int i = 0; i < WT.Count; i++)
             {
-                if (isTaken)
-                {
-                    for (int i = 0; i < WT.Count; i++) WT[i]++;
-                }
-                else
-                {
-                    for (int i = 0; i < WNT.Count; i++) WNT[i]++;
-                }
-            }
-            else
-            {
-                
-                if (isTaken)
-                {
-                    for (int i = 0; i < WT.Count; i++) WT[i]--;
-                }
-                else
-                {
-                    for (int i = 0; i < WNT.Count; i++) WNT[i]--;
-                }
+                WT[i] += adjustment;
+                WNT[i] += adjustment;
             }
         }
+
 
 
 

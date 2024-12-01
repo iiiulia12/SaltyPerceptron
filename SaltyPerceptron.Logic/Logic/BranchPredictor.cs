@@ -7,7 +7,7 @@ public class BranchPredictor
     private HRRegistry hrRegistry;
     private int numPerceptrons;
 
-    public BranchPredictor(int numPerceptrons = 5,  int hrSize = 5)
+    public BranchPredictor(int numPerceptrons, int hrSize)
     {
         this.numPerceptrons = numPerceptrons;
         perceptrons = new Perceptron[numPerceptrons];
@@ -31,7 +31,9 @@ public class BranchPredictor
         int sum = currentPerceptron.CalculateSum(isTaken);
         bool predictedTaken = sum >= 0;
 
-        currentPerceptron.AdjustWeights(isTaken, branch.Taken);
+        //currentPerceptron.AdjustWeights(isTaken, branch.Taken);
+        currentPerceptron.AdjustWeights(branch.Taken);
+
 
         hrRegistry.UpdateHistory(branch.Taken ? 1 : -1);
         branch.TakenPredict = predictedTaken;
