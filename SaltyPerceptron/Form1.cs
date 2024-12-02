@@ -52,7 +52,7 @@ public partial class Form1 : Form
                 UpdateBranchMetrics(branch, metrics);
                 metrics.CalculateDerivedMetrics();
             }
-
+            MessageBox.Show(metrics.CorrectPredictions.ToString());
             lblTotalBranches.Text = $"Total Branches: {metrics.TotalBranches}";
             lblCorrectPredictions.Text = $"Correct Predictions: {metrics.CorrectPredictions}";
             lblIncorrectPredictions.Text = $"Incorrect Predictions: {metrics.IncorrectPredictions}";

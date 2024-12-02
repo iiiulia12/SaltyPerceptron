@@ -14,7 +14,7 @@ public class BranchPredictor
 
         for (int i = 0; i < numPerceptrons; i++)
         {
-            perceptrons[i] = new Perceptron(10); 
+            perceptrons[i] = new Perceptron(hrSize);
         }
 
         hrRegistry = new HRRegistry(hrSize); 
@@ -26,9 +26,9 @@ public class BranchPredictor
         int index = branch.PC % numPerceptrons;  
         Perceptron currentPerceptron = perceptrons[index];
 
-        bool isTaken = hrRegistry.GetBit(index) == 1;
+        bool isTaken = hrRegistry.GetLastBit() == 1;
 
-        int sum = currentPerceptron.CalculateSum(isTaken);
+        int sum = currentPerceptron.CalculateSum(isTaken, hrRegistry.GetAll());
         bool predictedTaken = sum >= 0;
 
         //currentPerceptron.AdjustWeights(isTaken, branch.Taken);
