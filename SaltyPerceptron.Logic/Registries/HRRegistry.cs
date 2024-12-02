@@ -1,8 +1,7 @@
-﻿
-using SaltyPerceptron.Logic.Instruction;
+﻿using SaltyPerceptron.Logic.Instruction;
 using System.Collections;
 
-namespace SaltyPerceptron.Logic.Logic
+namespace SaltyPerceptron.Logic.Registries
 {
     public class HRRegistry
     {
@@ -19,7 +18,7 @@ namespace SaltyPerceptron.Logic.Logic
         {
             return HR.ToList();
         }
-        private void shift ()
+        private void shift()
         {
             for (int i = 0; i < size - 1; i++)
             {
@@ -29,13 +28,13 @@ namespace SaltyPerceptron.Logic.Logic
 
         public int GetLastBit()
         {
-            return HR[size-1];
+            return HR[size - 1];
         }
         public void UpdateHistory(int result)
         {
             shift();
 
-            HR[size-1] = result;    
+            HR[size - 1] = result;
         }
     }
 }

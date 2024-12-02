@@ -1,7 +1,8 @@
-﻿
-namespace SaltyPerceptron.Logic.Instruction
+﻿using SaltyPerceptron.Logic.Instruction;
+
+namespace SaltyPerceptron.Logic.Registries
 {
-    public class InstructionRegistry
+    public class BranchRegistry
     {
         private List<Branch> instructions = new List<Branch>();
 
@@ -11,11 +12,11 @@ namespace SaltyPerceptron.Logic.Instruction
                 instructions.Add(instruction);
         }
 
-        public List<Branch> GetAll ()
+        public List<Branch> GetAll()
         {
             return instructions.ToList();
         }
-     
-     
+
+
     }
 }

@@ -1,41 +1,33 @@
 ﻿using SaltyPerceptron.Logic.Instruction;
 using SaltyPerceptron.Logic.Logic;
+using SaltyPerceptron.Logic.Registries;
 
 public class BranchPredictor
 {
-    private Perceptron[] perceptrons;
     private HRRegistry hrRegistry;
-    private int numPerceptrons;
+    private PerceptronRegistry perceptronRegistry;
 
-    public BranchPredictor(int numPerceptrons, int hrSize)
+    public BranchPredictor(HRRegistry hrRegistry, PerceptronRegistry perceptronRegistry)
     {
-        this.numPerceptrons = numPerceptrons;
-        perceptrons = new Perceptron[numPerceptrons];
-
-        for (int i = 0; i < numPerceptrons; i++)
-        {
-            perceptrons[i] = new Perceptron(hrSize);
-        }
-
-        hrRegistry = new HRRegistry(hrSize); 
+        this.perceptronRegistry = perceptronRegistry;
+        this.hrRegistry = hrRegistry;
     }
-
 
     public void SimulateBranch(Branch branch)
     {
-        int index = branch.PC % numPerceptrons;  
-        Perceptron currentPerceptron = perceptrons[index];
+        int index = branch.PC % perceptronRegistry.GetPerceptronCount();
+        Console.WriteLine(index + "perceptron index");
+        
+        Perceptron currentPerceptron = perceptronRegistry.GetByIndex(index);
 
         bool isTaken = hrRegistry.GetLastBit() == 1;
 
         int sum = currentPerceptron.CalculateSum(isTaken, hrRegistry.GetAll());
         bool predictedTaken = sum >= 0;
 
-        //currentPerceptron.AdjustWeights(isTaken, branch.Taken);
-        currentPerceptron.AdjustWeights(branch.Taken);
+        currentPerceptron.AdjustWeights( branch.ActualTaken);
 
-
-        hrRegistry.UpdateHistory(branch.Taken ? 1 : -1);
-        branch.TakenPredict = predictedTaken;
+        hrRegistry.UpdateHistory(branch.ActualTaken ? 1 : -1);
+        branch.PredictTaken = predictedTaken;
     }
 }

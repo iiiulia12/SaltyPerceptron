@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             AddFileButton = new Button();
-            extractedInfo = new ListBox();
+            extractedBranches = new ListBox();
             perceptronsNrUpDown = new NumericUpDown();
             hrSizeUpDown = new NumericUpDown();
             lblPerceptronsNr = new Label();
@@ -41,132 +41,179 @@
             lblMispredictionRate = new Label();
             lblTruePositiveRate = new Label();
             lblTrueNegativeRate = new Label();
+            predictions = new ListBox();
+            label1 = new Label();
+            label2 = new Label();
             ((System.ComponentModel.ISupportInitialize)perceptronsNrUpDown).BeginInit();
             ((System.ComponentModel.ISupportInitialize)hrSizeUpDown).BeginInit();
             SuspendLayout();
             // 
             // AddFileButton
             // 
-            AddFileButton.Location = new Point(873, 319);
+            AddFileButton.Location = new Point(1091, 399);
             AddFileButton.Margin = new Padding(2);
             AddFileButton.Name = "AddFileButton";
-            AddFileButton.Size = new Size(90, 27);
+            AddFileButton.Size = new Size(112, 34);
             AddFileButton.TabIndex = 0;
             AddFileButton.Text = "Add File";
             AddFileButton.UseVisualStyleBackColor = true;
             AddFileButton.Click += AddFileButton_Click;
             // 
-            // extractedInfo
+            // extractedBranches
             // 
-            extractedInfo.FormattingEnabled = true;
-            extractedInfo.Location = new Point(39, 62);
-            extractedInfo.Margin = new Padding(2);
-            extractedInfo.Name = "extractedInfo";
-            extractedInfo.Size = new Size(924, 244);
-            extractedInfo.TabIndex = 1;
+            extractedBranches.FormattingEnabled = true;
+            extractedBranches.ItemHeight = 25;
+            extractedBranches.Location = new Point(49, 78);
+            extractedBranches.Margin = new Padding(2);
+            extractedBranches.Name = "extractedBranches";
+            extractedBranches.Size = new Size(587, 304);
+            extractedBranches.TabIndex = 1;
             // 
             // perceptronsNrUpDown
             // 
-            perceptronsNrUpDown.Location = new Point(189, 343);
+            perceptronsNrUpDown.Location = new Point(236, 429);
+            perceptronsNrUpDown.Margin = new Padding(4);
+            perceptronsNrUpDown.Maximum = new decimal(new int[] { 10000, 0, 0, 0 });
             perceptronsNrUpDown.Name = "perceptronsNrUpDown";
-            perceptronsNrUpDown.Size = new Size(150, 27);
+            perceptronsNrUpDown.Size = new Size(188, 31);
             perceptronsNrUpDown.TabIndex = 2;
             perceptronsNrUpDown.Value = new decimal(new int[] { 5, 0, 0, 0 });
             // 
             // hrSizeUpDown
             // 
-            hrSizeUpDown.Location = new Point(189, 374);
+            hrSizeUpDown.Location = new Point(236, 468);
+            hrSizeUpDown.Margin = new Padding(4);
             hrSizeUpDown.Name = "hrSizeUpDown";
-            hrSizeUpDown.Size = new Size(150, 27);
+            hrSizeUpDown.Size = new Size(188, 31);
             hrSizeUpDown.TabIndex = 3;
             hrSizeUpDown.Value = new decimal(new int[] { 5, 0, 0, 0 });
             // 
             // lblPerceptronsNr
             // 
             lblPerceptronsNr.AutoSize = true;
-            lblPerceptronsNr.Location = new Point(39, 343);
+            lblPerceptronsNr.Location = new Point(49, 429);
+            lblPerceptronsNr.Margin = new Padding(4, 0, 4, 0);
             lblPerceptronsNr.Name = "lblPerceptronsNr";
-            lblPerceptronsNr.Size = new Size(144, 20);
+            lblPerceptronsNr.Size = new Size(175, 25);
             lblPerceptronsNr.TabIndex = 4;
             lblPerceptronsNr.Text = "Perceptrons Number";
             // 
             // lblHrSize
             // 
             lblHrSize.AutoSize = true;
-            lblHrSize.Location = new Point(39, 376);
+            lblHrSize.Location = new Point(49, 470);
+            lblHrSize.Margin = new Padding(4, 0, 4, 0);
             lblHrSize.Name = "lblHrSize";
-            lblHrSize.Size = new Size(60, 20);
+            lblHrSize.Size = new Size(72, 25);
             lblHrSize.TabIndex = 5;
             lblHrSize.Text = "HR Size";
             // 
             // lblTotalBranches
             // 
             lblTotalBranches.AutoSize = true;
-            lblTotalBranches.Location = new Point(385, 343);
+            lblTotalBranches.Location = new Point(481, 429);
+            lblTotalBranches.Margin = new Padding(4, 0, 4, 0);
             lblTotalBranches.Name = "lblTotalBranches";
-            lblTotalBranches.Size = new Size(120, 20);
+            lblTotalBranches.Size = new Size(143, 25);
             lblTotalBranches.TabIndex = 6;
             lblTotalBranches.Text = "Total Branches: 0";
             // 
             // lblCorrectPredictions
             // 
             lblCorrectPredictions.AutoSize = true;
-            lblCorrectPredictions.Location = new Point(385, 374);
+            lblCorrectPredictions.Location = new Point(481, 468);
+            lblCorrectPredictions.Margin = new Padding(4, 0, 4, 0);
             lblCorrectPredictions.Name = "lblCorrectPredictions";
-            lblCorrectPredictions.Size = new Size(149, 20);
+            lblCorrectPredictions.Size = new Size(180, 25);
             lblCorrectPredictions.TabIndex = 7;
             lblCorrectPredictions.Text = "Correct Predictions: 0";
             // 
             // lblIncorrectPredictions
             // 
             lblIncorrectPredictions.AutoSize = true;
-            lblIncorrectPredictions.Location = new Point(385, 405);
+            lblIncorrectPredictions.Location = new Point(481, 506);
+            lblIncorrectPredictions.Margin = new Padding(4, 0, 4, 0);
             lblIncorrectPredictions.Name = "lblIncorrectPredictions";
-            lblIncorrectPredictions.Size = new Size(159, 20);
+            lblIncorrectPredictions.Size = new Size(192, 25);
             lblIncorrectPredictions.TabIndex = 8;
             lblIncorrectPredictions.Text = "Incorrect Predictions: 0";
             // 
             // lblAccuracy
             // 
             lblAccuracy.AutoSize = true;
-            lblAccuracy.Location = new Point(612, 343);
+            lblAccuracy.Location = new Point(765, 429);
+            lblAccuracy.Margin = new Padding(4, 0, 4, 0);
             lblAccuracy.Name = "lblAccuracy";
-            lblAccuracy.Size = new Size(114, 20);
+            lblAccuracy.Size = new Size(140, 25);
             lblAccuracy.TabIndex = 9;
             lblAccuracy.Text = "Accuracy: 0.00%";
             // 
             // lblMispredictionRate
             // 
             lblMispredictionRate.AutoSize = true;
-            lblMispredictionRate.Location = new Point(612, 374);
+            lblMispredictionRate.Location = new Point(765, 468);
+            lblMispredictionRate.Margin = new Padding(4, 0, 4, 0);
             lblMispredictionRate.Name = "lblMispredictionRate";
-            lblMispredictionRate.Size = new Size(176, 20);
+            lblMispredictionRate.Size = new Size(213, 25);
             lblMispredictionRate.TabIndex = 10;
             lblMispredictionRate.Text = "MispredictionRate: 0.00%";
             // 
             // lblTruePositiveRate
             // 
             lblTruePositiveRate.AutoSize = true;
-            lblTruePositiveRate.Location = new Point(612, 405);
+            lblTruePositiveRate.Location = new Point(765, 506);
+            lblTruePositiveRate.Margin = new Padding(4, 0, 4, 0);
             lblTruePositiveRate.Name = "lblTruePositiveRate";
-            lblTruePositiveRate.Size = new Size(171, 20);
+            lblTruePositiveRate.Size = new Size(207, 25);
             lblTruePositiveRate.TabIndex = 11;
             lblTruePositiveRate.Text = "True Positive Rate: 0.00%";
             // 
             // lblTrueNegativeRate
             // 
             lblTrueNegativeRate.AutoSize = true;
-            lblTrueNegativeRate.Location = new Point(612, 438);
+            lblTrueNegativeRate.Location = new Point(765, 548);
+            lblTrueNegativeRate.Margin = new Padding(4, 0, 4, 0);
             lblTrueNegativeRate.Name = "lblTrueNegativeRate";
-            lblTrueNegativeRate.Size = new Size(181, 20);
+            lblTrueNegativeRate.Size = new Size(217, 25);
             lblTrueNegativeRate.TabIndex = 12;
             lblTrueNegativeRate.Text = "True Negative Rate: 0.00%";
             // 
+            // predictions
+            // 
+            predictions.FormattingEnabled = true;
+            predictions.ItemHeight = 25;
+            predictions.Location = new Point(679, 78);
+            predictions.Margin = new Padding(2);
+            predictions.Name = "predictions";
+            predictions.Size = new Size(587, 304);
+            predictions.TabIndex = 13;
+            // 
+            // label1
+            // 
+            label1.AutoSize = true;
+            label1.Location = new Point(49, 39);
+            label1.Name = "label1";
+            label1.Size = new Size(82, 25);
+            label1.TabIndex = 14;
+            label1.Text = "Branches";
+            // 
+            // label2
+            // 
+            label2.AutoSize = true;
+            label2.Location = new Point(679, 39);
+            label2.Name = "label2";
+            label2.Size = new Size(99, 25);
+            label2.TabIndex = 15;
+            label2.Text = "Predictions";
+            // 
             // Form1
             // 
-            AutoScaleDimensions = new SizeF(8F, 20F);
+            AutoScaleDimensions = new SizeF(10F, 25F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1064, 517);
+            ClientSize = new Size(1330, 646);
+            Controls.Add(label2);
+            Controls.Add(label1);
+            Controls.Add(predictions);
             Controls.Add(lblTrueNegativeRate);
             Controls.Add(lblTruePositiveRate);
             Controls.Add(lblMispredictionRate);
@@ -178,7 +225,7 @@
             Controls.Add(lblPerceptronsNr);
             Controls.Add(hrSizeUpDown);
             Controls.Add(perceptronsNrUpDown);
-            Controls.Add(extractedInfo);
+            Controls.Add(extractedBranches);
             Controls.Add(AddFileButton);
             Margin = new Padding(2);
             Name = "Form1";
@@ -192,7 +239,7 @@
         #endregion
 
         private Button AddFileButton;
-        private ListBox extractedInfo;
+        private ListBox extractedBranches;
         private NumericUpDown perceptronsNrUpDown;
         private NumericUpDown hrSizeUpDown;
         private Label lblPerceptronsNr;
@@ -204,5 +251,8 @@
         private Label lblMispredictionRate;
         private Label lblTruePositiveRate;
         private Label lblTrueNegativeRate;
+        private ListBox predictions;
+        private Label label1;
+        private Label label2;
     }
 }

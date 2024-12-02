@@ -1,4 +1,6 @@
-﻿namespace SaltyPerceptron.Logic;
+﻿using SaltyPerceptron.Logic.Instruction;
+
+namespace SaltyPerceptron.Logic.Measurements;
 
 public class BranchMetrics
 {
@@ -32,5 +34,37 @@ public class BranchMetrics
         TrueNegativeRate = ActualNotTaken > 0
             ? (double)TrueNegatives / ActualNotTaken * 100
             : 0;
+    }
+    
+    public void UpdateBranchMetrics(Branch branch, BranchMetrics metrics)
+    {
+        metrics.TotalBranches++;
+
+        if (branch.ActualTaken)
+        {
+            metrics.ActualTaken++;
+            if (branch.PredictTaken)
+            {
+                metrics.CorrectPredictions++;
+                metrics.TruePositives++;
+            }
+            else
+            {
+                metrics.IncorrectPredictions++;
+            }
+        }
+        else
+        {
+            metrics.ActualNotTaken++;
+            if (!branch.PredictTaken)
+            {
+                metrics.CorrectPredictions++;
+                metrics.TrueNegatives++;
+            }
+            else
+            {
+                metrics.IncorrectPredictions++;
+            }
+        }
     }
 }
