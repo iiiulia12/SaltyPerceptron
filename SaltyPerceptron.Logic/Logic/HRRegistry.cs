@@ -15,22 +15,21 @@ namespace SaltyPerceptron.Logic.Logic
             HR = Enumerable.Repeat(-1, size).ToList();
         }
 
-        public List<Branch> GetAll()
+        public List<int> GetAll()
         {
-            return (List<Branch>)HR.AsEnumerable();
+            return HR.ToList();
         }
         private void shift ()
         {
             for (int i = 0; i < size - 1; i++)
             {
                 HR[i] = HR[i + 1];
-
             }
         }
 
-        public int GetBit(int index)
+        public int GetLastBit()
         {
-            return HR[index];
+            return HR[size-1];
         }
         public void UpdateHistory(int result)
         {

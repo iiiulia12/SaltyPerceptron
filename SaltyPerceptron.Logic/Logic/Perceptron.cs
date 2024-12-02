@@ -13,40 +13,25 @@ namespace SaltyPerceptron.Logic.Logic
             WNT = Enumerable.Repeat(-1, numWeights).ToList();
         }
 
-        public int CalculateSum(bool isTaken)
+        public int CalculateSum(bool isTaken, List<int> history)
         {
+            int sum = 0;
+
             List<int> weights = isTaken ? WT : WNT;
-            return weights.Sum();
+            weights.Select((weight, index) => sum += weight * history[index]);
+  
+            return sum;
         }
 
-        public void AdjustWeights(bool isTaken, bool realTaken)
+        public void AdjustWeights(bool realTaken)
         {
-            if (isTaken == realTaken)
+            int adjustment = realTaken ? 1 : -1;
+
+            for (int i = 0; i < WT.Count; i++)
             {
-                if (isTaken)
-                {
-                    for (int i = 0; i < WT.Count; i++) WT[i]++;
-                }
-                else
-                {
-                    for (int i = 0; i < WNT.Count; i++) WNT[i]++;
-                }
-            }
-            else
-            {
-                
-                if (isTaken)
-                {
-                    for (int i = 0; i < WT.Count; i++) WT[i]--;
-                }
-                else
-                {
-                    for (int i = 0; i < WNT.Count; i++) WNT[i]--;
-                }
+                WT[i] += adjustment;
+                WNT[i] += adjustment;
             }
         }
-
-
-
     }
 }
