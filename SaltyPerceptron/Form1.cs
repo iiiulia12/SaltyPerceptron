@@ -6,22 +6,13 @@ namespace SaltyPerceptron;
 
 public partial class Form1 : Form
 {
-    BranchRegistry branchRegistry;
-    BranchPredictor branchPredictor;
-    FileParser fileParser;
-    HRRegistry hrRegistry;
-    PerceptronRegistry perceptronRegistry;
-    BranchMetrics branchMetrics;
+    Bootstrapper bootstrapper;
     bool fileLoaded = false;
     public Form1()
     {
         InitializeComponent();
         simulateButton.Visible = false;
-        hrRegistry = new HRRegistry();
-        perceptronRegistry = new PerceptronRegistry();
-        branchPredictor = new BranchPredictor(hrRegistry, perceptronRegistry);
-        branchMetrics = new BranchMetrics();
-
+        bootstrapper = new Bootstrapper();
     }
 
     private void AddFileButton_Click(object sender, EventArgs e)
@@ -35,14 +26,12 @@ public partial class Form1 : Form
 
         if (openFileDialog.ShowDialog() == DialogResult.OK)
         {
-            fileParser = new FileParser(openFileDialog.FileName);
-            fileParser.ParseFile();
-            fileLoaded = true;
+           bootstrapper.LoadFile(openFileDialog.FileName);
         }
         simulateButton.Visible = fileLoaded;
-        branchRegistry = new BranchRegistry(fileParser.GetValues());
         MessageBox.Show("Branches extracted successfully!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
-        printBranches(branchRegistry.GetAll());
+        printBranches(bootstrapper.BranchRegistry.GetAll());
+        simulateButton.Visible = true;
 
     }
 
@@ -88,8 +77,8 @@ public partial class Form1 : Form
         }
         predictions.Items.AddRange(predictionsList.ToArray());
 
-        int realtaken = takenBrances(branchRegistry);
-        int predictTaken = predictBranches(branchRegistry);
+        int realtaken = takenBrances(bootstrapper.BranchRegistry);
+        int predictTaken = predictBranches(bootstrapper.BranchRegistry);
         int total = index;
         MessageBox.Show(realtaken.ToString() + "real taken" + predictTaken.ToString() + " predict taken");
 
@@ -97,7 +86,6 @@ public partial class Form1 : Form
 
     private void printMetrics(BranchMetrics metrics)
     {
-        Console.WriteLine(metrics.Accuracy);
         lblTotalBranches.Text = $"Total Branches: {metrics.TotalBranches}";
         lblCorrectPredictions.Text = $"Correct Predictions: {metrics.CorrectPredictions}";
         lblIncorrectPredictions.Text = $"Incorrect Predictions: {metrics.IncorrectPredictions}";
@@ -112,22 +100,18 @@ public partial class Form1 : Form
         int perceptronsCount = (int)perceptronsNrUpDown.Value;
         int hrCount = (int)hrSizeUpDown.Value;
    
-        hrRegistry.Reset();
-        hrRegistry.Initialize(hrCount);
-        perceptronRegistry.Reset();
-        perceptronRegistry.Initialize(perceptronsCount, hrCount);
- 
+       
+        bootstrapper.ResetAndInitializeRegistries(perceptronsCount, hrCount);
 
+        bootstrapper.BranchRegistry.GetAll().ForEach(branch =>
+        {
+            bootstrapper.BranchPredictor.SimulateBranch(branch);
+            bootstrapper.BranchMetrics.UpdateBranchMetrics(branch, bootstrapper.BranchMetrics);
+            bootstrapper.BranchMetrics.CalculateDerivedMetrics();
+        });
 
-            branchRegistry.GetAll().ForEach(branch =>
-            {
-                branchPredictor.SimulateBranch(branch);
-                branchMetrics.UpdateBranchMetrics(branch, branchMetrics);
-                branchMetrics.CalculateDerivedMetrics();
-            });
+        printPredictions(bootstrapper.BranchRegistry.GetAll());
+        printMetrics(bootstrapper.BranchMetrics);
 
-            printPredictions(branchRegistry.GetAll());
-            printMetrics(branchMetrics);
-        
     }
 }

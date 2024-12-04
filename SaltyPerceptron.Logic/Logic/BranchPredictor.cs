@@ -16,7 +16,6 @@ public class BranchPredictor
     public void SimulateBranch(Branch branch)
     {
         int index = branch.PC % perceptronRegistry.GetPerceptronCount();
-        Console.WriteLine(index + "perceptron index");
         
         Perceptron currentPerceptron = perceptronRegistry.GetByIndex(index);
 
