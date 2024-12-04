@@ -12,8 +12,7 @@ namespace SaltyPerceptron.Logic.Registries
         }
         public void Add(in Branch instruction)
         {
-            if (instruction.Type.Type == 'T' || instruction.Type.Type == 'F')
-                instructions.Add(instruction);
+            instructions.Add(instruction);
         }
 
         public List<Branch> GetAll()

@@ -16,26 +16,42 @@ namespace SaltyPerceptron.Logic.Logic
 
         }
 
-        public int CalculateSum(bool isTaken, List<int> history)
+        public int CalculateSum(List<int> history)
         {
             int sum = 0;
 
-            List<int> weights = isTaken ? WT : WNT;
-            weights.Select((weight, index) => sum += weight * history[index]);
-  
+            for (int i = 0; i < history.Count; i++)
+            {
+                if (history[i] == 1)
+                {
+                    sum += WT[i];
+                }
+                else
+                {
+                    sum += WNT[i];
+                }
+            }
+
             return sum;
         }
 
-        public void AdjustWeights(bool realTaken)
+        public void AdjustWeights(bool realTaken, List<int> history)
         {
-            int adjustment = realTaken ? 1 : -1;
+            int current = realTaken ? 1 : -1;
 
-            for (int i = 0; i < WT.Count; i++)
+            for (int i = 0; i < history.Count; i++)
             {
-                //if (WT[i] > theta  || WNT[i] < theta) break;
+                if (current == 1 && history[i] == 1)
+                    WT[i]++;
 
-                 WT[i] += adjustment;
-                 WNT[i] += adjustment;
+                if (current == 1 && history[i] == -1)
+                    WNT[i]++;
+
+                if (current == -1 && history[i] == 1)
+                    WT[i]--;
+
+                if (current == -1 && history[i] == -1)
+                    WNT[i]--;
             }
         }
         //public void AdjustWeights(bool isTaken, bool realTaken)

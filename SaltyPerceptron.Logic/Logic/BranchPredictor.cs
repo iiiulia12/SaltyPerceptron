@@ -1,6 +1,7 @@
 ﻿using SaltyPerceptron.Logic.Instruction;
 using SaltyPerceptron.Logic.Logic;
 using SaltyPerceptron.Logic.Registries;
+using System.Diagnostics;
 
 public class BranchPredictor
 {
@@ -19,12 +20,13 @@ public class BranchPredictor
         
         Perceptron currentPerceptron = perceptronRegistry.GetByIndex(index);
 
-        bool isTaken = hrRegistry.GetLastBit() == 1;
-
-        int sum = currentPerceptron.CalculateSum(isTaken, hrRegistry.GetAll());
+        int sum = currentPerceptron.CalculateSum(hrRegistry.GetAll());
         bool predictedTaken = sum >= 0;
 
-        currentPerceptron.AdjustWeights( branch.ActualTaken);
+        Debug.WriteLine($"index = {index} | sum = {sum}");
+
+        List<int> hrg = hrRegistry.GetAll();
+        currentPerceptron.AdjustWeights(branch.ActualTaken, hrg);
 
         hrRegistry.UpdateHistory(branch.ActualTaken ? 1 : -1);
         branch.PredictTaken = predictedTaken;
