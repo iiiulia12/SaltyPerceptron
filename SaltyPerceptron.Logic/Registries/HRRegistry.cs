@@ -5,14 +5,8 @@ namespace SaltyPerceptron.Logic.Registries
 {
     public class HRRegistry
     {
-        private List<int> HR;
-        private int size;
-
-        public HRRegistry(int size = 5)
-        {
-            this.size = size;
-            HR = Enumerable.Repeat(-1, size).ToList();
-        }
+        private List<int> HR = new List<int>();
+        private int size = 0;
 
         public List<int> GetAll()
         {
@@ -35,6 +29,18 @@ namespace SaltyPerceptron.Logic.Registries
             shift();
 
             HR[size - 1] = result;
+        }
+        
+        public void Reset()
+        {
+            HR.Clear();
+            size = 0;
+        }
+
+        public void Initialize(int size)
+        {
+            this.size = size;
+            HR = Enumerable.Repeat(-1, size).ToList();
         }
     }
 }

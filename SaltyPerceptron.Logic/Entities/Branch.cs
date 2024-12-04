@@ -14,6 +14,5 @@ namespace SaltyPerceptron.Logic.Instruction
 
         }
 
-
     }
 }

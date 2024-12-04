@@ -44,6 +44,7 @@
             predictions = new ListBox();
             label1 = new Label();
             label2 = new Label();
+            simulateButton = new Button();
             ((System.ComponentModel.ISupportInitialize)perceptronsNrUpDown).BeginInit();
             ((System.ComponentModel.ISupportInitialize)hrSizeUpDown).BeginInit();
             SuspendLayout();
@@ -206,11 +207,23 @@
             label2.TabIndex = 15;
             label2.Text = "Predictions";
             // 
+            // simulateButton
+            // 
+            simulateButton.Location = new Point(1091, 461);
+            simulateButton.Margin = new Padding(2);
+            simulateButton.Name = "simulateButton";
+            simulateButton.Size = new Size(112, 34);
+            simulateButton.TabIndex = 16;
+            simulateButton.Text = "Simulate";
+            simulateButton.UseVisualStyleBackColor = true;
+            simulateButton.Click += simulateButton_Click;
+            // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(10F, 25F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1330, 646);
+            Controls.Add(simulateButton);
             Controls.Add(label2);
             Controls.Add(label1);
             Controls.Add(predictions);
@@ -254,5 +267,6 @@
         private ListBox predictions;
         private Label label1;
         private Label label2;
+        private Button simulateButton;
     }
 }

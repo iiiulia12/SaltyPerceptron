@@ -6,6 +6,10 @@ namespace SaltyPerceptron.Logic.Registries
     {
         private List<Branch> instructions = new List<Branch>();
 
+        public BranchRegistry(List<(string, string)> values)
+        {
+            values.ForEach(x => this.Add(new Branch(x.Item1, x.Item2)));
+        }
         public void Add(in Branch instruction)
         {
             if (instruction.Type.Type == 'T' || instruction.Type.Type == 'F')
@@ -16,7 +20,6 @@ namespace SaltyPerceptron.Logic.Registries
         {
             return instructions.ToList();
         }
-
 
     }
 }

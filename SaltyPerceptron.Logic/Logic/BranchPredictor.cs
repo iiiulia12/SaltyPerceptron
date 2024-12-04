@@ -30,4 +30,12 @@ public class BranchPredictor
         hrRegistry.UpdateHistory(branch.ActualTaken ? 1 : -1);
         branch.PredictTaken = predictedTaken;
     }
+
+    public void Reset()
+    {
+        hrRegistry.Reset();
+        perceptronRegistry?.Reset();
+        hrRegistry = null;
+        perceptronRegistry = null; 
+    }
 }

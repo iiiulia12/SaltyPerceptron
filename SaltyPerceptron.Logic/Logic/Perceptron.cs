@@ -32,7 +32,7 @@ namespace SaltyPerceptron.Logic.Logic
 
             for (int i = 0; i < WT.Count; i++)
             {
-                if (WT[i] > theta  || WNT[i] < theta) break;
+                //if (WT[i] > theta  || WNT[i] < theta) break;
 
                  WT[i] += adjustment;
                  WNT[i] += adjustment;
