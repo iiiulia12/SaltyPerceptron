@@ -50,19 +50,6 @@ public partial class Form1 : Form
 
     }
 
-    private int predictBranches(BranchRegistry branches)
-    {
-        List<Branch> branches1 = branches.GetAll();
-        int sumPredict = branches1.Sum(b => b.PredictTaken ? 1 : 0);
-        return sumPredict;
-    }
-    private int takenBrances(BranchRegistry branches)
-    {
-        List<Branch> branches1 = branches.GetAll();
-        int sum = branches1.Sum(b => b.ActualTaken ? 1 : 0);
-        return sum;
-    }
-
     private void printPredictions(List<Branch> branches)
     {
         predictions.Items.Clear();
@@ -77,11 +64,6 @@ public partial class Form1 : Form
         }
         predictions.Items.AddRange(predictionsList.ToArray());
 
-        int realtaken = takenBrances(bootstrapper.BranchRegistry);
-        int predictTaken = predictBranches(bootstrapper.BranchRegistry);
-        int total = index;
-        MessageBox.Show(realtaken.ToString() + "real taken" + predictTaken.ToString() + " predict taken");
-
     }
 
     private void printMetrics(BranchMetrics metrics)
@@ -89,8 +71,8 @@ public partial class Form1 : Form
         lblTotalBranches.Text = $"Total Branches: {metrics.TotalBranches}";
         lblCorrectPredictions.Text = $"Correct Predictions: {metrics.CorrectPredictions}";
         lblIncorrectPredictions.Text = $"Incorrect Predictions: {metrics.IncorrectPredictions}";
-        lblAccuracy.Text = $"Accuracy: {metrics.Accuracy}%";
-        lblMispredictionRate.Text = $"Misprediction Rate: {metrics.MispredictionRate}%";
+        lblAccuracy.Text = $"Accuracy: {metrics.Accuracy:F2}%";
+        lblMispredictionRate.Text = $"Misprediction Rate: {metrics.MispredictionRate:F2}%";
         lblTruePositiveRate.Text = $"True Positive Rate: {metrics.TruePositiveRate:F2}%";
         lblTrueNegativeRate.Text = $"True Negative Rate: {metrics.TrueNegativeRate:F2}%";
     }
