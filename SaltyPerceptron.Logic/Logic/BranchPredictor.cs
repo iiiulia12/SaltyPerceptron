@@ -23,7 +23,7 @@ public class BranchPredictor
         int sum = currentPerceptron.CalculateSum(hrRegistry.GetAll());
         bool predictedTaken = sum >= 0;
 
-        Debug.WriteLine($"index = {index} | sum = {sum}");
+        //Debug.WriteLine($"index = {index} | sum = {sum}");
 
         List<int> hrg = hrRegistry.GetAll();
         currentPerceptron.AdjustWeights(branch.ActualTaken, hrg);

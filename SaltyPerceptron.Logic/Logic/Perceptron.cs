@@ -41,44 +41,12 @@ namespace SaltyPerceptron.Logic.Logic
 
             for (int i = 0; i < history.Count; i++)
             {
-                if (current == 1 && history[i] == 1)
-                    WT[i]++;
-
-                if (current == 1 && history[i] == -1)
-                    WNT[i]++;
-
-                if (current == -1 && history[i] == 1)
-                    WT[i]--;
-
-                if (current == -1 && history[i] == -1)
-                    WNT[i]--;
+                if (history[i] == 1)
+                    WT[i] += current;
+                else
+                    WNT[i] += current;
             }
         }
-        //public void AdjustWeights(bool isTaken, bool realTaken)
-        //{
-        //    if (isTaken == realTaken)
-        //    {
-        //        if (isTaken)
-        //        {
-        //            for (int i = 0; i < WT.Count; i++) WT[i]++;
-        //        }
-        //        else
-        //        {
-        //            for (int i = 0; i < WNT.Count; i++) WNT[i]++;
-        //        }
-        //    }
-        //    else
-        //    {
 
-        //        if (isTaken)
-        //        {
-        //            for (int i = 0; i < WT.Count; i++) WT[i]--;
-        //        }
-        //        else
-        //        {
-        //            for (int i = 0; i < WNT.Count; i++) WNT[i]--;
-        //        }
-        //    }
-        //}
     }
 }
