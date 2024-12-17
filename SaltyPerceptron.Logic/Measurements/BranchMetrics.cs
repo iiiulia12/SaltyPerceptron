@@ -67,4 +67,20 @@ public class BranchMetrics
             }
         }
     }
+
+    public void Reset()
+    {
+        TotalBranches = 0;
+        CorrectPredictions = 0;
+        IncorrectPredictions = 0;
+        ActualNotTaken = 0;
+        ActualTaken = 0;
+        TrueNegativeRate = 0;
+        TruePositiveRate = 0;
+        TruePositives = 0;
+        TrueNegatives = 0;
+        Accuracy = 0;
+        MispredictionRate = 0;
+        
+    }
 }

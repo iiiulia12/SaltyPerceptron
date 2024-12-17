@@ -34,6 +34,7 @@ namespace SaltyPerceptron
             HRRegistry.Initialize(hrCount);
             PerceptronRegistry.Reset();
             PerceptronRegistry.Initialize(perceptronsCount, hrCount);
+            BranchMetrics.Reset();
         }
     }
 }
